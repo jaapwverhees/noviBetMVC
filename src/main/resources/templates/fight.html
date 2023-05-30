@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/registration/fight}" th:object="${match}" method="POST">
+    <table>
+        <td>User One</td>
+        <td>
+            <select id="userOne" required th:field="*{userOne}">
+                <option th:each="user :${users}"
+                        th:value="${user.getEmail()}"
+                        th:text="${user.getFirstName()}">
+            </select>
+        </td>
+        <td>
+            <select id="userTwo" required th:field="*{userTwo}">
+                <option th:each="user :${users}"
+                        th:value="${user.getEmail()}"
+                        th:text="${user.getFirstName()}">
+            </select>
+        </td>
+    </table>
+    <input type="submit" value="Save"/>
+</form>
+</body>
+</html>
