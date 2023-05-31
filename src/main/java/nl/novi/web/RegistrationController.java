@@ -3,7 +3,9 @@ package nl.novi.web;
 import nl.novi.dto.UserRegistrationDto;
 import nl.novi.model.DTO.MatchDTO;
 import nl.novi.model.Match;
+import nl.novi.model.User;
 import nl.novi.repository.MatchRepository;
+import nl.novi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class RegistrationController {
 	@Autowired
 	private MatchRepository matchRepository;
 
+	@Autowired
+	private UserRepository userRepository;
+
 	public RegistrationController(UserService userService) {
 		super();
 		this.userService = userService;
@@ -31,6 +36,11 @@ public class RegistrationController {
 	@ModelAttribute("user")
 	public UserRegistrationDto userRegistrationDto() {
 		return new UserRegistrationDto();
+	}
+
+	@ModelAttribute("userreal")
+	public User User() {
+		return new User();
 	}
 
 	@GetMapping
@@ -60,7 +70,18 @@ public class RegistrationController {
 	}
 	@PostMapping(path = "/fight")
 	private String submitEmployee(@ModelAttribute("match") MatchDTO match, Model model) {
+		User userOne = userRepository.findById(match.getUserOne()).orElseThrow(RuntimeException::new);
+		User userTwo = userRepository.findById(match.getUserTwo()).orElseThrow(RuntimeException::new);
+		Match newMatch = matchRepository.save(Match.builder()
+						.userOne(userOne)
+						.userTwo(userTwo)
+				.build());
 		//matchRepository.save(match);
-		return "redirect:/registration?success";
+		return "redirect:/registration/fightlist";
+	}
+
+	@GetMapping("/fightlist")
+	public String fightlist() {
+		return "fightlist";
 	}
 }

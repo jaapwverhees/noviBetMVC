@@ -7,6 +7,6 @@ import nl.novi.model.User;
 @Getter
 @Setter
 public class MatchDTO {
-    private String userOne;
-    private String userTwo;
+    private Long userOne;
+    private Long userTwo;
 }

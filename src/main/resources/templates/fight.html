@@ -10,16 +10,16 @@
         <td>User One</td>
         <td>
             <select id="userOne" required th:field="*{userOne}">
-                <option th:each="user :${users}"
-                        th:value="${user.getEmail()}"
-                        th:text="${user.getFirstName()}">
+                <option th:each="userreal :${users}"
+                        th:value="${userreal.getId()}"
+                        th:text="${userreal.getFirstName()}">
             </select>
         </td>
         <td>
             <select id="userTwo" required th:field="*{userTwo}">
-                <option th:each="user :${users}"
-                        th:value="${user.getEmail()}"
-                        th:text="${user.getFirstName()}">
+                <option th:each="userreal :${users}"
+                        th:value="${userreal.getId()}"
+                        th:text="${userreal.getFirstName()}">
             </select>
         </td>
     </table>
