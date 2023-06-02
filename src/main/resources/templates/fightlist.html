@@ -5,6 +5,39 @@
     <title>Title</title>
 </head>
 <body>
-<div th:insert="header :: header">...</div>
+<div>fightlist</div>
+<div th:each="thematch :${matches}">
+    <div th:text="${thematch.getUserOne().getFirstName()}
+    + ' vs. '
+    + ${thematch.getUserTwo().getLastName()}
+    + ' winner:' + ${thematch.getWinnerName()}">
+    </div>
+    <form th:action="@{/addwinner}" th:object="${match}" method="post">
+        <input type="hidden" name="id" th:value="${thematch.getId()}">
+        <input type="hidden" name="userOne" th:value="${thematch.userOne.getId()}">
+        <input type="hidden" name="UserTwo" th:value="${thematch.userTwo.getId()}">
+        <select name="winner" required th:field="*{winner}">
+            <option th:field="*{winner}" th:each="user :${users}"
+                    th:value="${user.getId()}"
+                    th:text="${user.getFirstName()}">
+        </select>
+        <button type="submit">Update</button>
+    </form>
+    <!--    <form th:action="@{/addwinner}" th:object="${match}" method="POST">-->
+    <!--        <select id="id" required th:field="*{id}">-->
+    <!--            <input type="hidden" th:value="${thematch.getId()}" th:field="*{id}"/>-->
+    <!--        </select>-->
+    <!--        <input id="id" type="hidden" th:value="${thematch.getId()}" th:field="*{id}"/>-->
+    <!--        <input id="userOne" type="hidden" th:value="${thematch.getUserOne().getId()}" th:field="*{userOne}"/>-->
+    <!--        <input id="userTwo" type="hidden" th:value="${thematch.getUserTwo().getId()}" th:field="*{userTwo}"/>-->
+    <!--        <div th:text="${thematch.getUserOne().getFirstName()} + ' vs. ' + ${thematch.getUserTwo().getLastName()}"></div>-->
+    <!--        <select id="winner" required th:field="*{winner}">-->
+    <!--            <option th:field="*{winner}" th:each="user :${users}"-->
+    <!--                    th:value="${user.getId()}"-->
+    <!--                    th:text="${user.getFirstName()}">-->
+    <!--        </select>-->
+    <!--        <input type="submit" value="Save"/>-->
+    <!--    </form>-->
+</div>
 </body>
 </html>

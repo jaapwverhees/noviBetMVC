@@ -9,6 +9,7 @@ public class Application {
 
 	//https://www.knowledgefactory.net/2021/09/registration-login-springboot-security-thymeleaf.html
 	//https://www.thymeleaf.org/doc/articles/springsecurity.html
+	//https://www.learn-it-with-examples.com/development/java/thymeleaf/update-data-java-thymeleaf.html
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

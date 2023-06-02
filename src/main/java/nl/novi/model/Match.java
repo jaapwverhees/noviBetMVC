@@ -1,9 +1,9 @@
 package nl.novi.model;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Table(name = "match")
@@ -18,10 +18,14 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@Column(name = "userOne")
     @OneToOne
     private User userOne;
-    //@Column(name = "userTwo")
     @OneToOne
     private User userTwo;
+    @OneToOne
+    private User winner;
+
+    public String getWinnerName() {
+        return winner != null ? winner.getFirstName() : "";
+    }
 }

@@ -56,32 +56,8 @@ public class RegistrationController {
 
 	@PostMapping
 	public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
-
 		userService.save(registrationDto);
 		return "redirect:/registration?success";
 	}
 
-	@GetMapping("/fight")
-	public String populateList(Model model) {
-		userService.getAll();
-		model.addAttribute("users", userService.getAll());
-		model.addAttribute("match", new MatchDTO());
-		return "fight";
-	}
-	@PostMapping(path = "/fight")
-	private String submitEmployee(@ModelAttribute("match") MatchDTO match, Model model) {
-		User userOne = userRepository.findById(match.getUserOne()).orElseThrow(RuntimeException::new);
-		User userTwo = userRepository.findById(match.getUserTwo()).orElseThrow(RuntimeException::new);
-		Match newMatch = matchRepository.save(Match.builder()
-						.userOne(userOne)
-						.userTwo(userTwo)
-				.build());
-		//matchRepository.save(match);
-		return "redirect:/registration/fightlist";
-	}
-
-	@GetMapping("/fightlist")
-	public String fightlist() {
-		return "fightlist";
-	}
 }
