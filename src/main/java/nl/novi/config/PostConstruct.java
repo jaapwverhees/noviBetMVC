@@ -19,11 +19,11 @@ public class PostConstruct {
                 .lastName("ben")
                 .password("ben")
                 .build());
-        userService.save(UserRegistrationDto.builder()
-                .email("beh")
-                .firstName("beh")
-                .lastName("beh")
-                .password("beh")
+        userService.saveAdmin(UserRegistrationDto.builder()
+                .email("admin")
+                .firstName("admin")
+                .lastName("admin")
+                .password("admin")
                 .build());
     }
 }

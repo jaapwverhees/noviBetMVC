@@ -32,6 +32,7 @@
 				<ul class="nav navbar-nav">
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/bet}">Betting</a></li>
+					<li sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/bet}">admin</a></li>
 				</ul>
 			</div>
 		</div>
